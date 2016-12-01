@@ -28,8 +28,8 @@ def users():
     conn.commit()
 
     cur.execute('''SELECT count FROM counter''')
-    rv = cur.fetchall()
-    return str(rv)
+    hits = cur.fetchone()
+    return "Hits: {0}".format(int(hits[0]))
 
 @app.route("/")
 def hello():
