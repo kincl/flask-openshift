@@ -39,7 +39,7 @@ def users():
 
 @app.route("/")
 def hello():
-    return "Hello World from {0}".format(os.environ.get('POD_NAME', 'somewhere!')
+    return "Hello World from {0}".format(os.environ.get('POD_NAME', 'somewhere!'))
 
 if __name__ == "__main__":
     app.run()
