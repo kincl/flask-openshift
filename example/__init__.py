@@ -38,7 +38,7 @@ def users():
     
     cur.execute('''SHOW VARIABLES like "hostname"''')
     mysql_server = cur.fetchone()
-    return "Hits: {0}\n<br>\nWe are: {1}\n<br>\nTalking to:{3}".format(int(hits[0]), os.environ.get('POD_NAME'), mysql_server)
+    return "Hits: {0}\n<br>\nWe are: {1}\n<br>\nTalking to:{2}".format(int(hits[0]), os.environ.get('POD_NAME'), mysql_server[1])
 
 @app.route("/")
 def hello():
