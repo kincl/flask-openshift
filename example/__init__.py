@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 app.config.update(
     MYSQL_HOST='mysql',
-    MYSQL_USER='user',
-    MYSQL_PASSWORD='password',
+    MYSQL_USER='root',
+    MYSQL_PASSWORD='root',
     MYSQL_DB='database'
 )
 
