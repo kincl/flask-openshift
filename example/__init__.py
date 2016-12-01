@@ -17,6 +17,13 @@ def users():
     conn = mysql.connection
     cur = conn.cursor()
     cur.execute('''CREATE TABLE IF NOT EXISTS counter (id INT NOT NULL PRIMARY KEY, count INT NOT NULL)''')
+
+    cur.execute('''SELECT COUNT(id) from counter''')
+    count = cur.fetchone()
+    if int(count[0]) == 0:
+      cur.execute('''INSERT INTO counter (id,count) VALUES (0,0)''')
+      conn.commit()
+
     cur.execute('''UPDATE counter SET count = count + 1''')
     conn.commit()
 
