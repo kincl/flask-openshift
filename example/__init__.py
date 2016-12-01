@@ -12,10 +12,10 @@ app.config.update(
 
 mysql = MySQL(app)
 
-@app.route('/read_db_users')
+@app.route('/counter')
 def users():
     cur = mysql.connection.cursor()
-    cur.execute('''CREATE TABLE IF NOT EXISTS counter (count INT NOT NULL PRIMARY KEY)''')
+    cur.execute('''CREATE TABLE IF NOT EXISTS counter (id INT NOT NULL PRIMARY KEY, count INT NOT NULL)''')
     cur.execute('''UPDATE counter SET count = count + 1''')
     cur.execute('''SELECT count FROM counter''')
     rv = cur.fetchall()
