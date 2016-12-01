@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_mysqldb import MySQL
 from MySQLdb import OperationalError
@@ -34,11 +35,11 @@ def users():
 
     cur.execute('''SELECT count FROM counter''')
     hits = cur.fetchone()
-    return "Hits: {0}".format(int(hits[0]))
+    return "Hits: {0}\n<br>\n{1}".format(int(hits[0]), os.environ.get('POD_NAME'))
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return "Hello World from {0}".format(os.environ.get('POD_NAME', 'somewhere!')
 
 if __name__ == "__main__":
     app.run()
