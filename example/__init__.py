@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_mysqldb import MySQL
+from MySQLdb import OperationalError
 
 app = Flask(__name__)
 
@@ -14,7 +15,11 @@ mysql = MySQL(app)
 
 @app.route('/counter')
 def users():
-    conn = mysql.connection
+    try: 
+        conn = mysql.connection
+    except OperationalError, e:
+        return "Error connecting to database! {0}".format(e)
+
     cur = conn.cursor()
     cur.execute('''CREATE TABLE IF NOT EXISTS counter (id INT NOT NULL PRIMARY KEY, count INT NOT NULL)''')
 
