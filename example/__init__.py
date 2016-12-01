@@ -17,6 +17,8 @@ def users():
     cur = mysql.connection.cursor()
     cur.execute('''CREATE TABLE IF NOT EXISTS counter (id INT NOT NULL PRIMARY KEY, count INT NOT NULL)''')
     cur.execute('''UPDATE counter SET count = count + 1''')
+    cur.commit()
+
     cur.execute('''SELECT count FROM counter''')
     rv = cur.fetchall()
     return str(rv)
