@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 app.config.update(
     MYSQL_HOST='mysql',
-    MYSQL_USER='root',
-    MYSQL_PASSWORD='root',
+    MYSQL_USER='user',
+    MYSQL_PASSWORD='password',
     MYSQL_DB='database'
 )
 
@@ -15,7 +15,9 @@ mysql = MySQL(app)
 @app.route('/read_db_users')
 def users():
     cur = mysql.connection.cursor()
-    cur.execute('''SELECT user, host FROM mysql.user''')
+    cur.execute('''CREATE TABLE IF NOT EXISTS counter (count INT NOT NULL PRIMARY KEY)''')
+    cur.execute('''UPDATE counter SET count = count + 1''')
+    cur.execute('''SELECT count FROM counter''')
     rv = cur.fetchall()
     return str(rv)
 
